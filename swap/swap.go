@@ -63,3 +63,27 @@ func SwapOld(swap uniswap.Swap) (float64, string) {
 	}
 	return old.Hours(), olds
 }
+
+func SwapTrade(swap uniswap.Swap) (price float64, target string, amount string, amount1 string, amount2 string) {
+	price, target = SwapPrice(swap)
+	_amount, _ := strconv.ParseFloat(swap.AmountUSD, 32)
+	amount = fmt.Sprintf("$%.2f", _amount)
+
+	_amount1 := 0.1
+	if swap.Amount0In == "0" {
+		_amount1, _ = strconv.ParseFloat(swap.Amount0Out, 32)
+	} else {
+		_amount1, _ = strconv.ParseFloat(swap.Amount0In, 32)
+	}
+	amount1 = fmt.Sprintf("%.4f %s", _amount1, swap.Pair.Token0.Symbol)
+
+	_amount2 := 0.1
+	if swap.Amount1In == "0" {
+		_amount2, _ = strconv.ParseFloat(swap.Amount1Out, 32)
+	} else {
+		_amount2, _ = strconv.ParseFloat(swap.Amount1In, 32)
+	}
+	amount2 = fmt.Sprintf("%.4f %s", _amount2, swap.Pair.Token1.Symbol)
+
+	return price, target, amount, amount1, amount2
+}
