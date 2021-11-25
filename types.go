@@ -49,18 +49,20 @@ type Swaps struct {
 	}
 }
 
+type Pair struct {
+	Id     string `json:"id"`
+	Token0 struct {
+		Symbol string `json:"symbol"`
+	} `json:"token0"`
+	Token1 struct {
+		Symbol string `json:"symbol"`
+	} `json:"token1"`
+	Token0Price string `json:"token0Price"`
+	Token1Price string `json:"token1Price"`
+}
+
 type Pairs struct {
 	Data struct {
-		Pairs []struct {
-			Id     string `json:"id"`
-			Token0 struct {
-				Symbol string `json:"symbol"`
-			} `json:"token0"`
-			Token1 struct {
-				Symbol string `json:"symbol"`
-			} `json:"token1"`
-			Token0Price string `json:"token0Price"`
-			Token1Price string `json:"token1Price"`
-		}
+		Pairs []Pair
 	}
 }
