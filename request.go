@@ -7,6 +7,11 @@ import (
 	"time"
 )
 
+func RequestPairs(target chan string, limit int, skip int) {
+	query := QueryPairs(limit, skip)
+	request(query, target)
+}
+
 func SwapsByDays(target chan string, limit int, address string) {
 	var results Swaps
 	var temp Swaps
