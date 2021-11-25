@@ -6,6 +6,15 @@ import (
 	uniswap "github.com/hirokimoto/uniswap-api"
 )
 
+func SwapName(swap uniswap.Swap) (name string) {
+	if swap.Pair.Token0.Symbol == "WETH" {
+		name = swap.Pair.Token1.Name
+	} else {
+		name = swap.Pair.Token0.Name
+	}
+	return name
+}
+
 func SwapPrice(swap uniswap.Swap) (price float64, target string) {
 	amountUSD, _ := strconv.ParseFloat(swap.AmountUSD, 32)
 	amountToken, _ := strconv.ParseFloat(swap.Amount0Out, 32)
