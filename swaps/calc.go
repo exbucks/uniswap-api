@@ -43,3 +43,13 @@ func MinMaxPrice(swaps uniswap.Swaps) (float64, float64) {
 	}
 	return min, max
 }
+
+// AveragePrice returns average price of swaps.
+func AveragePrice(swaps []uniswap.Swap) float64 {
+	sum := 0.0
+	for _, item := range swaps {
+		price, _ := swap.Price(item)
+		sum += price
+	}
+	return sum / float64(len(swaps))
+}
